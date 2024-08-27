@@ -1,12 +1,11 @@
 let input = document.getElementById('output');
 
-let buttons = document.querySelectorAll('num');
+let buttons = document.querySelectorAll('.num');
 
 let string = "";
 let arr = Array.from(buttons);
 arr.forEach(button => {
     button.addEventListener('click', (e) =>{
-        console.log(string)
         if(e.target.innerHTML == '='){
             string = eval(string);
             input.value = string;
