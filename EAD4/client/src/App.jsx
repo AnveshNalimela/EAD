@@ -21,33 +21,87 @@ const App = () => {
       console.error("Error while fetching the data: " + error);
     }
   };
+  const addStudent = async (newStudent) => {
+    try {
+      const response = await fetch("http://localhost:3000/students/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newStudent),
+      });
+      const data = await response.json();
+      if (data) {
+        setStudents([...students, { data }]);
+        setName("");
+        setRollNo("1601XXXXXXXX");
+        setPassed(false);
+      }
+    } catch (error) {
+      console.error("Error while adding the student: " + error);
+    }
+  };
 
   const handleAddStudent = (e) => {
     e.preventDefault();
-    if (name) {
-      setStudents([...students, { id: Date.now(), name }]);
-      setName("");
+    console.log(name, rollNo, isPassed);
+    const newStudent = {
+      name,
+      rollNo,
+      isPassed,
+    };
+    addStudent(newStudent);
+  };
+
+  const deleteStudent = async (id) => {
+    console.log(typeof id);
+    const response = await fetch(`http://localhost:3000/students/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    setStudents(students.filter((student) => student._id !== data._id));
+    await console.log("deleted Succesfully");
+  };
+
+  const UpdateStatus = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/students/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const updatedStudent = await response.json(); // Get the updated student data from the response
+
+      // Update the student list in the state
+      setStudents(
+        students.map((student) =>
+          student._id === updatedStudent._id
+            ? { ...student, isPassed: updatedStudent.isPassed }
+            : student
+        )
+      );
+    } catch (e) {
+      console.error("Error while updating the student: ", e);
     }
   };
 
   const handleDeleteStudent = (id) => {
-    setStudents(students.filter((student) => student.id !== id));
+    deleteStudent(id);
   };
 
   const handleUpdateStudent = (id) => {
-    const updatedName = prompt("Enter new name:");
-    if (updatedName) {
-      setStudents(
-        students.map((student) =>
-          student.id === id ? { ...student, name: updatedName } : student
-        )
-      );
-    }
+    UpdateStatus(id);
   };
 
   useEffect(() => {
     getStudents();
-  }, []); // Added dependency array to prevent infinite calls
+  }, []);
 
   return (
     <div>
@@ -67,7 +121,7 @@ const App = () => {
             <input
               type="text"
               value={rollNo}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setRollNo(e.target.value)}
               placeholder="Enter Roll No"
             />
             <div className="checkbox-container">
@@ -100,16 +154,16 @@ const App = () => {
             students.map((student) => (
               <div key={student._id} className="student-item">
                 <div>
-                  <h3>{student.name}</h3>
-                  <p>{student.rollNo}</p>
-                  <p>{student.isPassed}?Passed:Failed</p>
+                  <h3 id="name-text">{student.name}</h3>
+                  <p id="roll-text">{student.rollNo}</p>
+                  <h2 id="status">{student.isPassed ? "Passed" : "Failed"}</h2>
                 </div>
-                <span>{student.name}</span>
+
                 <div>
-                  <button onClick={() => handleUpdateStudent(student.id)}>
-                    Update
+                  <button onClick={() => UpdateStatus(student._id)}>
+                    {student.isPassed ? "Mark as Failed" : "Mark as Passed"}
                   </button>
-                  <button onClick={() => handleDeleteStudent(student.id)}>
+                  <button onClick={() => handleDeleteStudent(student._id)}>
                     Delete
                   </button>
                 </div>

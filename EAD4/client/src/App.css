@@ -30,7 +30,6 @@ header {
   flex: 1;
 }
 
-
 input[type="text"] {
   width: calc(100% - 22px);
   padding: 10px;
@@ -39,10 +38,10 @@ input[type="text"] {
   border-radius: 3px;
 }
 
-
 button {
   padding: 8px 12px;
   margin-right: 5px;
+  margin-top: 5px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -54,7 +53,6 @@ button {
 button:hover {
   background-color: #45a049;
 }
-
 
 .list-container {
   background-color: white;
@@ -75,4 +73,9 @@ button:hover {
 
 .student-item:last-child {
   border-bottom: none;
+}
+
+#name-text {
+  text-align: left;
+  font-size: 20px;
 }
