@@ -32,9 +32,9 @@ const App = () => {
       });
       const data = await response.json();
       if (data) {
-        setStudents([...students, { data }]);
+        setStudents([...students, data]);
         setName("");
-        setRollNo("1601XXXXXXXX");
+        setRollNo("160122737XXX");
         setPassed(false);
       }
     } catch (error) {
@@ -122,7 +122,8 @@ const App = () => {
               type="text"
               value={rollNo}
               onChange={(e) => setRollNo(e.target.value)}
-              placeholder="Enter Roll No"
+              placeholder="160122737XXX"
+              maxLength={12}
             />
             <div className="checkbox-container">
               <label>
@@ -142,7 +143,9 @@ const App = () => {
                 Failed
               </label>
             </div>
-            <button type="submit">Add Student</button>
+            <button id="add-btn" type="submit">
+              Add Student
+            </button>
           </form>
         </div>
 
@@ -154,8 +157,8 @@ const App = () => {
             students.map((student) => (
               <div key={student._id} className="student-item">
                 <div>
-                  <h3 id="name-text">{student.name}</h3>
-                  <p id="roll-text">{student.rollNo}</p>
+                  <h3 id="name-text">Student Name:{student.name}</h3>
+                  <p id="roll-text">Roll No:{student.rollNo}</p>
                   <h2 id="status">{student.isPassed ? "Passed" : "Failed"}</h2>
                 </div>
 

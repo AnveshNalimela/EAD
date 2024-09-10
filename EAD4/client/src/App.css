@@ -79,3 +79,18 @@ button:hover {
   text-align: left;
   font-size: 20px;
 }
+
+.checkbox-container {
+  margin-top: 10px;
+  font-size: 20px;
+  align-items: center;
+}
+
+#add-btn {
+  margin-top: 20px;
+  padding: 4px;
+  font-size: large;
+  color: white;
+  width: 200px;
+  height: 30px;
+}
