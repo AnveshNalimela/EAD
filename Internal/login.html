@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <style>
+        body {
+
+            height: 100%;
+            display: flex;
+            justify-content: center;
+
+            align-items: center;
+
+        }
+
+        #center-div {
+            border: 2px dotted black;
+            margin-top: 100px;
+            width: 200px;
+            height: 300px;
+            padding: 20px;
+            background-color: lightblue;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        #head {
+            font-weight: 700;
+
+        }
+
+        label {
+            font-size: medium;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        #btn {
+            margin-top: 20px;
+            width: 100px;
+            height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="center-div">
+        <h1 id="head">Login</h1>
+        <label>UserName:</label><br><input type="text" id="name" name="name" placeholder="JohnDoe" required><br>
+        <label>Password:</label><br><input type="password" placeholder="****" required>
+        <input type="submit" id="btn">
+    </div>
+
+</body>
+
+</html>

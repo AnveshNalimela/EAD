@@ -4,6 +4,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 40px;
 }
 .grid-container {
   display: grid;

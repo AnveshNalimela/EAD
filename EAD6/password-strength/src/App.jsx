@@ -19,8 +19,8 @@ function App() {
         score++;
       }
     });
-    const values = ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"];
 
+    const values = ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"];
     setStrength(values[score - 1]);
   };
 
