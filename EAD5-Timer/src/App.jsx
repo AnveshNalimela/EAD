@@ -9,10 +9,10 @@ function App() {
 
   function startTimer() {
     if (!isRunning) {
-      isRunning(true);
+      setIsRunning(true);
       currentTimer.current = setInterval(() => {
         setCount((prevCount) => prevCount + 1);
-      }, 1000); 
+      }, 1000);
     }
   }
   function pauseTimer() {
@@ -22,11 +22,9 @@ function App() {
     }
   }
   function resetTimer() {
-    if (isRunning) {
-      clearInterval(currentTimer.current);
-      setIsRunning(false);
-      setCount(0);
-    }
+    clearInterval(currentTimer.current);
+    setIsRunning(false);
+    setCount(0);
   }
 
   return (
@@ -36,10 +34,10 @@ function App() {
         <code>Time count:</code> {count}
       </p>
       <div className="card">
-        <button onClick={startTimer} disabled={!isRunning}>
+        <button onClick={startTimer} disabled={isRunning}>
           Start
         </button>
-        <button onClick={pauseTimer} disabled={isRunning}>
+        <button onClick={pauseTimer} disabled={!isRunning}>
           Pause
         </button>
         <button onClick={resetTimer}>Reset</button>
